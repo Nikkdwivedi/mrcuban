@@ -421,14 +421,14 @@ export const CreateOrderDevTemplate = (
       <p>Your Ride Booking Confirmation</p>
     </div>
     <div class="content">
-      <p>Hi <strong>{{customerName}}</strong>,</p>
+      <p>Hi <strong>Mr Cuban</strong>,</p>
       <p>Thank you for booking with <strong>Mr Cuban</strong>! Here are your ride details:</p>
       <div class="info">
         <p><strong>Booking ID:</strong> ${customer_id}</p>
         <p><strong>Ride Date:</strong> ${pickup_date}</p>
         <p><strong>Pickup Location:</strong> ${pickup_address}</p>
         <p><strong>Drop-off Location:</strong> ${drop_address}</p>
-        <p><strong>Total Distance:</strong> ${distance}</p>
+        <p><strong>Total Distance:</strong> ${distance} KM</p>
         <p><strong>Trip Type:</strong> ${trip_type}</p>
         <p><strong>Seat:</strong> ${seater}</p>
 

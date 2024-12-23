@@ -60,13 +60,13 @@ export const CreateLead = async (req, res) => {
       "mrcubandev@gmail.com",
       "Order Create",
       CreateOrderDevTemplate(
-        pickup_address,
-        drop_address,
-        pickup_date,
-        customer_id,
-        trip_type,
-        seater,
-        distance
+        pickup,
+        drop,
+        pickdate,
+        id,
+        type,
+        seat,
+        km
       )
     );
     return res.status(200).json({ msg: "Lead Generate Successfully", data });

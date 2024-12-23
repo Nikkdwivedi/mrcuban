@@ -14,7 +14,7 @@ export const sendMails = async (email, subject, html) => {
   });
 
   await transport.sendMail({
-    from: "amazonego23@gmail.com",
+    from: "Mrcuban777@gmail.com",
     to: email,
     subject,
     html: html,
