@@ -24,69 +24,142 @@ export const SavedToken = async (req, res) => {
 };
 
 // Send Notification Function
+// export const SendNotification = async (req, res) => {
+//   try {
+//     const { title, message, seat } = req.query;
+
+//     let expo = new Expo();
+
+//     const drivers = await Rides.find({
+//       $and: [{ seat: Number(seat) }, { status: true }],
+//     },'driverId');
+
+//     console.log(drivers,"drivers")
+    
+//     let newTokens = [];
+
+//     for (let i = 0; i < drivers?.length; i++) {
+//       let temp = await Tokens.findOne({ partnerId: drivers[i]?.driverId });
+//       if (temp !== null) {
+//         newTokens.push(temp);
+//       }
+//     }
+
+//     if (newTokens?.length === 0) {
+//       return res.status(200).json({msg:"No Driver Exist"});
+//     }
+
+
+//     console.log(newTokens,"token")
+
+//     let messages = [];
+
+//     for (let pushToken of newTokens) {
+//       // Check if the token is a valid Expo push token
+//       if (!Expo.isExpoPushToken(pushToken.token)) {
+//         console.error(
+//           `Push token ${pushToken.token} is not a valid Expo push token`
+//         );
+//         continue;
+//       }
+//       messages.push({
+//         to: pushToken.token,
+//         sound: "default",
+//         title: title,
+//         body: message,
+//         data: { someData: "goes here" },
+//       });
+//     }
+// console.log(messages)
+
+
+//     // Send notifications in chunks
+//     let chunks = expo.chunkPushNotifications(messages);
+//     (async () => {
+//       for (let chunk of chunks) {
+//         try {
+//           let receipts = await expo.sendPushNotificationsAsync(chunk);
+//           console.log(receipts,"avc");
+//         } catch (error) {
+//           console.error(error);
+//         }
+//       }
+//     })();
+
+//     res.status(200).send("Notifications sent");
+//   } catch (error) {
+//     console.log(error);
+//     res
+//       .status(400)
+//       .json({ msg: error.message || "Error sending notifications" });
+//   }
+// };
+
 export const SendNotification = async (req, res) => {
   try {
     const { title, message, seat } = req.query;
 
-    let expo = new Expo();
+    const expo = new Expo();
 
-    const drivers = await Rides.find({
-      $and: [{ seat: Number(seat) }, { status: true }],
-    });
-    
-    let newTokens = [];
+    // Fetch drivers with the given seat and status
+    const drivers = await Rides.find(
+      { $and: [{ seat: Number(seat) }, { status: true }] },
+      'driverId'
+    );
 
-    for (let i = 0; i < drivers?.length; i++) {
-      let temp = await Tokens.findOne({ partnerId: drivers[i]?.driverId });
-      if (temp !== null) {
-        newTokens.push(temp);
-      }
+    if (!drivers.length) {
+      return res.status(200).json({ msg: "No drivers available" });
     }
 
-    if (newTokens?.length === 0) {
-      return res.status(200).send("No Driver Exist");
+    const driverIds = drivers.map(driver => driver.driverId);
+
+  
+
+    // Fetch tokens for all drivers
+    const newTokens = await Tokens.find({ partnerId: { $in: driverIds } });
+
+    if (!newTokens.length) {
+      return res.status(200).json({ msg: "No valid tokens found" });
     }
 
-    let messages = [];
+    const messages = [];
 
     for (let pushToken of newTokens) {
-      // Check if the token is a valid Expo push token
-      if (!Expo.isExpoPushToken(pushToken.token)) {
-        console.error(
-          `Push token ${pushToken.token} is not a valid Expo push token`
-        );
+      if (!pushToken.token || !Expo.isExpoPushToken(pushToken.token)) {
+        console.error(`Invalid push token: ${pushToken?.token}`);
         continue;
       }
       messages.push({
         to: pushToken.token,
         sound: "default",
-        title: title,
+        title,
         body: message,
         data: { someData: "goes here" },
       });
     }
 
-    // Send notifications in chunks
-    let chunks = expo.chunkPushNotifications(messages);
-    (async () => {
-      for (let chunk of chunks) {
-        try {
-          let receipts = await expo.sendPushNotificationsAsync(chunk);
-          console.log(receipts);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    })();
+    if (!messages.length) {
+      return res.status(200).json({ msg: "No valid push tokens to send notifications" });
+    }
 
-    res.status(200).send("Notifications sent");
+    // Send notifications in chunks
+    const chunks = expo.chunkPushNotifications(messages);
+    try {
+      for (let chunk of chunks) {
+        const receipts = await expo.sendPushNotificationsAsync(chunk);
+        console.log("Receipts:", receipts);
+      }
+      res.status(200).send("Notifications sent successfully");
+    } catch (error) {
+      console.error("Error sending notifications:", error);
+      res.status(500).json({ msg: "Error sending notifications" });
+    }
   } catch (error) {
-    console.log(error);
-    res
-      .status(400)
-      .json({ msg: error.message || "Error sending notifications" });
+    console.error("Error in SendNotification API:", error);
+    res.status(400).json({ msg: error.message || "Error processing request" });
   }
 };
+
 
 export const SendSingularNotification = async (id, title, message) => {
   try {
