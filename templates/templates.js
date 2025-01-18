@@ -427,7 +427,7 @@ export const CreateOrderDevTemplate = (
       <p>Hi <strong>Mr Cuban</strong>,</p>
       <p>Thank you for booking with <strong>Mr Cuban</strong>! Here are your ride details:</p>
       <div class="info">
-   <p><strong>Booking ID:</strong> ${customer_id}</p>
+   <p><strong>Booking ID:</strong><a href={https://cuban.onrender.com/ride/status?q=${customer_id}} style="text-decoration:none;cursor:pointer;"> ${customer_id}</a></p>
         <p><strong>Ride Date:</strong> ${pickup_date}</p>
         <p><strong>Pickup Location:</strong> ${pickup_address}</p>
         <p><strong>Drop-off Location:</strong> ${drop_address}</p>
