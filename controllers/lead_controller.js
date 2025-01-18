@@ -56,6 +56,11 @@ export const CreateLead = async (req, res) => {
       distance: km,
     });
 
+    const customerDetails = await User.findById(
+      { _id: id },
+      "name email phone"
+    );
+
     await sendDevMail(
       "mrcubandev@gmail.com",
       "Order Create",
@@ -66,7 +71,10 @@ export const CreateLead = async (req, res) => {
         id,
         type,
         seat,
-        km
+        km,
+        customerDetails?.name,
+        customerDetails?.email,
+        customerDetails?.phone
       )
     );
     return res.status(200).json({ msg: "Lead Generate Successfully", data });
@@ -309,5 +317,42 @@ export const FinishRide = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).json({ msg: error });
+  }
+};
+
+export const CheckRideStatus = async (req, res) => {
+  try {
+    const { id } = req.query;
+
+    const LeadOrder = await Lead.findOne({ customer_id: id },'-otp');
+    const user = await User.findOne({ _id: id }, "name email phone");
+
+    if (LeadOrder) {
+      const data = {
+        customerOrder: LeadOrder,
+        customer: user,
+      };
+      return res
+        .status(200)
+        .json({ msg: "Ride Status", status: "Lead", data: data });
+    } else {
+      const customerOrder = await CustomerOrder.findOne(
+        { customerId: id },
+        "-otp"
+      ).sort({ updatedAt: -1 });
+
+      const data = {
+        customerOrder,
+        customer: user,
+      };
+      if (customerOrder)
+        return res.status(200).json({ msg: "Ride Status",status:"Order", data: data });
+      else return res.status(200).json({ msg: "Not exist", data: null });
+    }
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ msg: error?.message || error || "Something went wrong" });
   }
 };

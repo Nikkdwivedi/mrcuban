@@ -4,6 +4,7 @@ import {
   AcceptOrderLeadByCustomer,
   CancelRideByUser,
   CancelRideByUserAfterAccept,
+  CheckRideStatus,
   CreateLead,
   DisplayCustomerLead,
   DisplayOrderLeads,
@@ -24,5 +25,6 @@ router.get("/get/lead", DisplayCustomerLead);
 router.get("/get/lead/drivers", DisplayRides);
 router.get("/start/ride", StartRide);
 router.get("/end/ride", FinishRide);
+router.get("/ride/status",CheckRideStatus)
 
 export default router;

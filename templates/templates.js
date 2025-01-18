@@ -358,7 +358,10 @@ export const CreateOrderDevTemplate = (
   customer_id,
   trip_type,
   seater,
-  distance
+  distance,
+  name,
+  email,
+  phone
 ) => {
   return ` <!DOCTYPE html>
 <html>
@@ -424,13 +427,16 @@ export const CreateOrderDevTemplate = (
       <p>Hi <strong>Mr Cuban</strong>,</p>
       <p>Thank you for booking with <strong>Mr Cuban</strong>! Here are your ride details:</p>
       <div class="info">
-        <p><strong>Booking ID:</strong> ${customer_id}</p>
+   <p><strong>Booking ID:</strong> ${customer_id}</p>
         <p><strong>Ride Date:</strong> ${pickup_date}</p>
         <p><strong>Pickup Location:</strong> ${pickup_address}</p>
         <p><strong>Drop-off Location:</strong> ${drop_address}</p>
         <p><strong>Total Distance:</strong> ${distance} KM</p>
         <p><strong>Trip Type:</strong> ${trip_type}</p>
         <p><strong>Seat:</strong> ${seater}</p>
+        <p><strong>Customer Name:</strong> ${name}</p>
+         <p><strong>Customer Phone:</strong><a href=${`tel:${phone}`}>+91 ${phone} </a></p>
+           <p><strong>Customer Email:</strong><a href="mailto:${email}?subject=Inquiry&body=Hello, I would like to know more about your services."> ${email}</a></p>
 
 
       </div>
@@ -438,7 +444,7 @@ export const CreateOrderDevTemplate = (
       <p>Safe travels!</p>
     </div>
     <div class="footer">
-      <p>&copy; {{year}} Mr Cuban. All rights reserved.</p>
+      <p>&copy; 2025 Mr Cuban. All rights reserved.</p>
     </div>
   </div>
 </body>
