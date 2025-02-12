@@ -24,210 +24,152 @@ export const ForgetmailHTML = (otp) => {
 };
 
 export const WelcomeHTMLWithOTP = (otp) => {
-  return `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Verify Your MR Cuban Account</title>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-  
-          body {
-            font-family: "Lato", system-ui;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-          }
-          .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-          }
-          .header {
-            background-color: #000000;
-            padding: 20px;
-            text-align: center;
-            color: #ffffff;
-          }
-          .header h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #ffa500; /* Orange color */
-          }
-          .content {
-            padding: 30px;
-            text-align: center;
-          }
-          .content h2 {
-            font-size: 22px;
-            color: #000000;
-          }
-          .content p {
-            font-size: 16px;
-            color: #333333;
-            line-height: 1.5;
-          }
-          .otp-code {
-            font-size: 24px;
-            font-weight: bold;
-            color: #000000;
-            margin: 20px 0;
-            letter-spacing: 4px;
-          }
-          .cta-button {
-            display: inline-block;
-            background-color: #ffa500; /* Orange color */
-            color: #ffffff;
-            padding: 12px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 20px;
-          }
-          .footer {
-            background-color: #000000;
-            padding: 20px;
-            text-align: center;
-            color: #ffffff;
-            font-size: 14px;
-          }
-          .footer a {
-            color: #ffa500; /* Orange color */
-            text-decoration: none;
-          }
-          .footer a:hover {
-            text-decoration: underline;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>Verify Your MR Cuban Account!</h1>
-          </div>
-          <div class="content">
-            <h2>Complete Your Registration</h2>
-            <p>
-              Thank you for registering with MR Cuban! To complete your account setup and start booking your rides, please verify your email address by using the OTP below:
-            </p>
-            <div class="otp-code">${otp}</div>
-            <p>
-              Enter this OTP on the account verification page within the app or website to confirm your email address.
-            </p>
-            <p>
-              If you didn't request this, please ignore this email or contact our support team.
-            </p>
-          
-          </div>
-          <div class="footer">
-            <p>&copy; 2024 MR Cuban. All rights reserved.</p>
-            <p>
-              <a href="https://www.privacypolicies.com/live/dfe8d4ff-f488-4761-8e2f-21fdc8b3052a">Privacy Policy</a> | 
-              <a href="https://mrcuban.in/contact">Contact Us</a>
-            </p>
-          </div>
+  return `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your MR Cuban Account</title>
+  </head>
+  <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); overflow: hidden;">
+      
+      <!-- Header -->
+      <div style="background-color: #000000; padding: 20px; color: #ffffff;">
+        <h1 style="margin: 0; font-size: 24px; color: #ffa500;">Confirm Your MR Cuban Account</h1>
+      </div>
+
+      <!-- Content -->
+      <div style="padding: 30px;">
+        <h2 style="font-size: 22px; color: #000000;">Finish Setting Up Your Account</h2>
+        <p style="font-size: 16px; color: #333333; line-height: 1.5;">
+          Welcome to MR Cuban, Here is your one-time code to confirm your email.
+        </p>
+
+        <!-- OTP Code -->
+        <div style="font-size: 24px; font-weight: bold; color: #000000; margin: 20px 0; letter-spacing: 0px;">
+          ${otp}
         </div>
-      </body>
-      </html>
-    `;
+
+        <p style="font-size: 16px; color: #333333; line-height: 1.5;">
+          Enter this code in the app or website to confirm your email address.
+        </p>
+
+        <!-- Security Warning -->
+        <p style="font-size: 14px; color: #777;">
+       If you did not request this code, no action is needed.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="background-color: #000000; padding: 20px; text-align: center; color: #ffffff; font-size: 14px;">
+        <p>&copy; 2024 MR Cuban. All rights reserved.</p>
+        <p>
+          <a href="https://www.privacypolicies.com/live/dfe8d4ff-f488-4761-8e2f-21fdc8b3052a" style="color: #ffa500; text-decoration: none;">Privacy Policy</a> | 
+          <a href="https://mrcuban.in/contact" style="color: #ffa500; text-decoration: none;">Contact Us</a>
+        </p>
+        <p style="font-size: 12px;">
+          If you no longer want to receive these emails, you can 
+          <a href="https://mrcuban.in/unsubscribe" style="color: #ffa500; text-decoration: none;">unsubscribe here</a>.
+        </p>
+      </div>
+    </div>
+  </body>
+  </html>`;
 };
 
 //--------------------------------------------Driver Templates--------------------------------------------->
 
 export const WelcomeDriverHTML = () => {
   return `
-          <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Welcome to MRCUBAN Partner APP</title>
-            <style>
-            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MRCUBAN Partner APP</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-                body {
-  font-family: "Lato", system-ui;
-                    margin: 0;
-                    padding: 0;
-                    background-color: #f4f4f4;
-                }
-                .container {
-                    max-width: 600px;
-                    margin: 0 auto;
-                    background-color: #ffffff;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                    overflow: hidden;
-                }
-                .header {
-                    background-color: #000000;
-                    padding: 20px;
-                    text-align: center;
-                    color: #ffffff;
-                }
-                .header h1 {
-                    margin: 0;
-                    font-size: 24px;
-                    color: #27c26d; /* Green color */
-                }
-                .content {
-                    padding: 30px;
-                    text-align: center;
-                }
-                .content h2 {
-                    font-size: 22px;
-                    color: #000000;
-                }
-                .content p {
-                    font-size: 16px;
-                    color: #333333;
-                    line-height: 1.5;
-                }
-                .footer {
-                    background-color: #000000;
-                    padding: 20px;
-                    text-align: center;
-                    color: #ffffff;
-                    font-size: 14px;
-                }
-                .footer a {
-                    color: #27c26d; /* Green color */
-                    text-decoration: none;
-                }
-                .footer a:hover {
-                    text-decoration: underline;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>Welcome to MRCUBAN Partner APP!</h1>
-                </div>
-                <div class="content">
-                    <h2>Your Account is Under Verification</h2>
-                    <p>
-                        Thank you for joining the MRCUBAN Partner APP, the most reliable way to drive with us. Your account is currently under verification.
-                    </p>
-                    <p>
-                        Once verified, your account will be activated, and our team will reach out to you for document verification and further communication.
-                    </p>
-                </div>
-                <div class="footer">
-                    <p>&copy; 2024 MRCUBAN. All rights reserved.</p>
-                    <p>
-                        <a href="https://www.privacypolicies.com/live/dfe8d4ff-f488-4761-8e2f-21fdc8b3052a">Privacy Policy</a> | 
-                        <a href="https://www.mrcuban.in/contact">Contact Us</a>
-                    </p>
-                </div>
-            </div>
-        </body>
-        </html>
+        body {
+            font-family: "Lato", system-ui;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #000000;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #27c26d; /* Green color */
+        }
+        .content {
+            padding: 30px;
+            text-align: center;
+        }
+        .content h2 {
+            font-size: 22px;
+            color: #000000;
+        }
+        .content p {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.5;
+        }
+        .footer {
+            background-color: #000000;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #27c26d; /* Green color */
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to MRCUBAN Partner APP!</h1>
+        </div>
+        <div class="content">
+            <h2>Your Account is Being Reviewed</h2>
+            <p>
+                Thank you for joining the MRCUBAN Partner APP, the most reliable way to drive with us. Your account is currently under review.
+            </p>
+            <p>
+                Once approved, you will receive further details from our team regarding document submission and next steps.
+            </p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 MRCUBAN. All rights reserved.</p>
+            <p>
+                <a href="https://www.privacypolicies.com/live/dfe8d4ff-f488-4761-8e2f-21fdc8b3052a">Privacy Policy</a> | 
+                <a href="https://www.mrcuban.in/contact">Contact Us</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
           `;
 };
 
@@ -427,7 +369,7 @@ export const CreateOrderDevTemplate = (
       <p>Hi <strong>Mr Cuban</strong>,</p>
       <p>Thank you for booking with <strong>Mr Cuban</strong>! Here are your ride details:</p>
       <div class="info">
-   <p><strong>Booking ID:</strong><a href={https://cuban.onrender.com/ride/status?q=${customer_id}} style="text-decoration:none;cursor:pointer;"> ${customer_id}</a></p>
+   <p><strong>Booking ID:</strong> <a href={https://cuban.onrender.com/ride/status?q=${customer_id}} style="text-decoration:none;cursor:pointer;"> ${customer_id}</a></p>
         <p><strong>Ride Date:</strong> ${pickup_date}</p>
         <p><strong>Pickup Location:</strong> ${pickup_address}</p>
         <p><strong>Drop-off Location:</strong> ${drop_address}</p>
