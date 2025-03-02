@@ -41,6 +41,8 @@ export const CreateLead = async (req, res) => {
       createdAt: { $lt: thirtyMinutesAgo },
     });
 
+    const extractKm = extractNumber(km);
+
     const data = await Lead.create({
       pickup_address: pickup,
       drop_address: drop,
@@ -53,7 +55,7 @@ export const CreateLead = async (req, res) => {
       status: "pending",
       trip_type: type,
       seater: seat,
-      distance: km,
+      distance: extractKm,
     });
 
     const customerDetails = await User.findById(
@@ -71,7 +73,7 @@ export const CreateLead = async (req, res) => {
         id,
         type,
         seat,
-        km,
+        extractKm,
         customerDetails?.name,
         customerDetails?.email,
         customerDetails?.phone
@@ -324,7 +326,7 @@ export const CheckRideStatus = async (req, res) => {
   try {
     const { id } = req.query;
 
-    const LeadOrder = await Lead.findOne({ customer_id: id },'-otp');
+    const LeadOrder = await Lead.findOne({ customer_id: id }, "-otp");
     const user = await User.findOne({ _id: id }, "name email phone");
 
     if (LeadOrder) {
@@ -346,7 +348,9 @@ export const CheckRideStatus = async (req, res) => {
         customer: user,
       };
       if (customerOrder)
-        return res.status(200).json({ msg: "Ride Status",status:"Order", data: data });
+        return res
+          .status(200)
+          .json({ msg: "Ride Status", status: "Order", data: data });
       else return res.status(200).json({ msg: "Not exist", data: null });
     }
   } catch (error) {
@@ -356,3 +360,8 @@ export const CheckRideStatus = async (req, res) => {
       .json({ msg: error?.message || error || "Something went wrong" });
   }
 };
+
+function extractNumber(input) {
+  const match = input.match(/\d+/);
+  return match ? parseInt(match[0], 10) : null;
+}

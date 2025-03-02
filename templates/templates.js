@@ -36,28 +36,28 @@ export const WelcomeHTMLWithOTP = (otp) => {
       
       <!-- Header -->
       <div style="background-color: #000000; padding: 20px; color: #ffffff;">
-        <h1 style="margin: 0; font-size: 24px; color: #ffa500;">Confirm Your MR Cuban Account</h1>
+        <h1 style="margin: 0; font-size: 24px; color: #ffa500;">Verify Your MR Cuban Account</h1>
       </div>
 
       <!-- Content -->
       <div style="padding: 30px;">
-        <h2 style="font-size: 22px; color: #000000;">Finish Setting Up Your Account</h2>
+        <h2 style="font-size: 22px; color: #000000;">Complete Your Registration</h2>
         <p style="font-size: 16px; color: #333333; line-height: 1.5;">
-          Welcome to MR Cuban, Here is your one-time code to confirm your email.
+          Thank you for signing up with MR Cuban! Use the code below to verify your email.
         </p>
 
         <!-- OTP Code -->
-        <div style="font-size: 24px; font-weight: bold; color: #000000; margin: 20px 0; letter-spacing: 0px;">
+        <div style="font-size: 24px; font-weight: bold; color: #000000; margin: 20px 0; letter-spacing: 2px;">
           ${otp}
         </div>
 
         <p style="font-size: 16px; color: #333333; line-height: 1.5;">
-          Enter this code in the app or website to confirm your email address.
+          Enter this code in the MR Cuban app or website to activate your account.
         </p>
 
-        <!-- Security Warning -->
+        <!-- Security Notice -->
         <p style="font-size: 14px; color: #777;">
-       If you did not request this code, no action is needed.
+          If you did not request this code, please ignore this message.
         </p>
       </div>
 
@@ -66,10 +66,10 @@ export const WelcomeHTMLWithOTP = (otp) => {
         <p>&copy; 2024 MR Cuban. All rights reserved.</p>
         <p>
           <a href="https://www.privacypolicies.com/live/dfe8d4ff-f488-4761-8e2f-21fdc8b3052a" style="color: #ffa500; text-decoration: none;">Privacy Policy</a> | 
-          <a href="https://mrcuban.in/contact" style="color: #ffa500; text-decoration: none;">Contact Us</a>
+          <a href="https://mrcuban.in/contact" style="color: #ffa500; text-decoration: none;">Contact Support</a>
         </p>
         <p style="font-size: 12px;">
-          If you no longer want to receive these emails, you can 
+          If you prefer not to receive these emails, you can 
           <a href="https://mrcuban.in/unsubscribe" style="color: #ffa500; text-decoration: none;">unsubscribe here</a>.
         </p>
       </div>
@@ -77,6 +77,7 @@ export const WelcomeHTMLWithOTP = (otp) => {
   </body>
   </html>`;
 };
+
 
 //--------------------------------------------Driver Templates--------------------------------------------->
 
