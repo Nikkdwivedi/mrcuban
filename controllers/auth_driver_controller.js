@@ -5,7 +5,7 @@ import {
 } from "../templates/templates.js";
 import { ErrorMsg } from "../utils/Error.js";
 import JWT from "jsonwebtoken";
-import { sendMails } from "../utils/SendMails.js";
+import { senBrevoMail, sendMails } from "../utils/SendMails.js";
 import { Driver } from "../models/driver.js";
 
 import cloudinary from "cloudinary";
@@ -246,7 +246,7 @@ export const Forget_Password_for_user = async (req, res) => {
     const subject = "Password Reset - Mr Cuban Partners";
     const message = ForgetDrivermailHTML(otp);
 
-    await sendMails(user?.email, subject, message);
+    await senBrevoMail(user?.email, subject, message);
     res.status(200).json({ msg: "OTP Send Successfully", data: data });
   } catch (error) {
     console.log(error);

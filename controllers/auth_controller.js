@@ -2,7 +2,7 @@ import { User } from "../models/user.js";
 import { ForgetmailHTML, WelcomeHTMLWithOTP } from "../templates/templates.js";
 import { ErrorMsg } from "../utils/Error.js";
 import JWT from "jsonwebtoken";
-import { sendMails } from "../utils/SendMails.js";
+import { senBrevoMail } from "../utils/SendMails.js";
 import { OTP_Generator } from "../utils/util.js";
 import { CustomerOrder } from "../models/order.js";
 
@@ -52,7 +52,7 @@ export const User_Register = async (req, res) => {
     const subject = "Welcome to MR Cuban! Your Journey Starts Here 🚗";
     const message = WelcomeHTMLWithOTP(otpv);
 
-    await sendMails(data?.email, subject, message);
+    await senBrevoMail(data?.email, subject, message);
 
     res
       .status(201)
@@ -181,7 +181,7 @@ export const Forget_Password_for_user = async (req, res) => {
     const subject = "Password Reset - Mr Cuban";
     const message = ForgetmailHTML(otp);
 
-    await sendMails(user?.email, subject, message);
+    await senBrevoMail(user?.email, subject, message);
     res.status(200).json({ msg: "OTP Send Successfully", data: [] });
   } catch (error) {
     console.log(error);
