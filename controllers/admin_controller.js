@@ -83,18 +83,16 @@ export const LoginAPI = async (req, res) => {
     const { email, password } = req.query;
 
     if (email === "mrcuban@gmail.com" && password === "zxc123cuban") {
-      return res
-        .status(200)
-        .json({
-          msg: "Login sucess",
-          data: [
-            {
-              email: "mrcuban@gmail.com",
-              token:
-                "zxcvbnmcuban345cubanjhjfshdfjhdsf77243zssssssxzdfdf24r234q213423x2qwAWEXRXTGEXRGTERTE",
-            },
-          ],
-        });
+      return res.status(200).json({
+        msg: "Login sucess",
+        data: [
+          {
+            email: "mrcuban@gmail.com",
+            token:
+              "zxcvbnmcuban345cubanjhjfshdfjhdsf77243zssssssxzdfdf24r234q213423x2qwAWEXRXTGEXRGTERTE",
+          },
+        ],
+      });
     } else {
       return res.status(400).json({ msg: "Invalid Credintials" });
     }
@@ -104,43 +102,47 @@ export const LoginAPI = async (req, res) => {
   }
 };
 
-
-
 export const FetchDriverOrders = async (req, res) => {
   try {
-    const { page, limit ,id} = req.query;
+    const { page, limit, id } = req.query;
 
     const pageNo = parseInt(page) || 1;
     const pageSize = parseInt(limit) || 20;
 
     const skip = (pageNo - 1) * pageSize;
 
-    const total = await DriverOrder.countDocuments({driverId:id});
-    const data = await DriverOrder.find({driverId:id})
+    const total = await DriverOrder.countDocuments({ driverId: id });
+    const data = await DriverOrder.find({ driverId: id })
       .limit(pageSize)
       .skip(skip)
-      .sort({ createdAt: 1 });
+      .sort({ createdAt: 1 }).lean(true);
+    let newData = [];
+    for (let i = 0; i < data?.length; i++) {
+      const customer = await User.findOne(
+        { _id: data[i]?.customerId },
+        "name email phone"
+      );
+      newData.push({ ...data[i], customerDetails: customer });
+    }
 
-    return res.status(200).json({ msg: "success", data, total });
+    return res.status(200).json({ msg: "success", data: newData, total });
   } catch (error) {
     console.log(error);
     res.status(400).json({ msg: error });
   }
 };
 
-
-
 export const FetchUserOrders = async (req, res) => {
   try {
-    const { page, limit ,id} = req.query;
+    const { page, limit, id } = req.query;
 
     const pageNo = parseInt(page) || 1;
     const pageSize = parseInt(limit) || 20;
 
     const skip = (pageNo - 1) * pageSize;
 
-    const total = await CustomerOrder.countDocuments({customerId:id});
-    const data = await CustomerOrder.find({customerId:id})
+    const total = await CustomerOrder.countDocuments({ customerId: id });
+    const data = await CustomerOrder.find({ customerId: id })
       .limit(pageSize)
       .skip(skip)
       .sort({ createdAt: 1 });
