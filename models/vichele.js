@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 const vicheleSchema = new mongoose.Schema({
     name:String,
     seat:Number,
+    type:String,
 },{timestamps:true})
 
 

@@ -2,14 +2,14 @@ import { Vichele } from "../models/vichele.js";
 
 export const createVichele = async (req, res) => {
   try {
-    const { name, seat } = req.query;
+    const { name, seat,type } = req.query;
 
     const check = await Vichele.find({ seat: seat });
-    console.log(check)
+
     if (check?.length > 0) {
       return res.status(400).json({ msg: "Model already exist" });
     } else {
-      const data = await Vichele.create({ name, seat });
+      const data = await Vichele.create({ name, seat,type });
       return res.status(201).json({ msg: "Vichele Created", data });
     }
   } catch (error) {
