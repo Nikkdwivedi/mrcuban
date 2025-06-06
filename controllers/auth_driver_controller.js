@@ -164,7 +164,7 @@ export const Driver_Login = async (req, res) => {
     const token = JWT.sign(
       { id: existuser?._id, email: existuser?.email },
       process.env.JWT_SECRET,
-      { expiresIn: "90d" } 
+      { expiresIn: "180d" } 
     );
 
     res
